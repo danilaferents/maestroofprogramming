@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>class Solution {
+    func reconstructQueue(_ people: [[Int]]) -&gt; [[Int]] {
+        let newpeople = people.sorted(by: {
+            if $0[0] == $1[0] {
+                return $0[1] &lt;= $1[1]
+            }
+            return $0[0] &gt;= $1[0]
+        })
+        var rightOrderedPeople = [[Int]]()
+        for element in newpeople {
+//            print(element)
+            rightOrderedPeople.insert(element, at: element[1])
+//            print(rightOrderedPeople)
+        }
+        return rightOrderedPeople
+    }
+}
+
+print(Solution().reconstructQueue([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 609}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

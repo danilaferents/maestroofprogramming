@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// s1/n1 = s2/n2
+// s1/n1 = (s-s1)/(n-n1)
+// s1(n - n1) = n1 (s - s1)
+// s1n - s1n1 = n1s - s1n1
+// s1/n1 = s/n
+// A[S][j] = можно ли за j монет получить сумму S 
+// A[S+p][j] = A[s][j-1 ]
+class Solution1 {
+    func splitArraySameAverage(_ nums: [Int]) -&gt; Bool {
+        var sum = 0 
+        var maxelement = 0
+        for num in nums {
+            sum += num
+            if num &gt; maxelement {
+                maxelement = num
+            }
+        }
+        let count = nums.count
+        var table = [[Int]]()
+        
+        for i in 0...sum + maxelement {
+            var row = [Int]()
+            for j in 0...count {
+                row.append(0)
+            }
+            table.append(row)
+        }
+        
+        for i in 0..&lt;count {
+            for s in stride(from: sum, through: 0, by: -1) {
+                for j in 1..&lt;count {
+                    if (table[s][j] == 1 ) {
+                        table[s + nums[i]][j + 1] = 1
+                    }
+                }
+            }
+            table[nums[i]][1] = 1
+        }
+        for s in 0...sum {
+            for i in 1..&lt;count {
+                let average = Float(s) / Float(i)
+                if (table[s][i] == 1 &amp;&amp; average*Float(count) == Float(sum)) {
+                    return true
+                }
+            }
+        }
+        return false 
+    }
+}
+
+Solution1().splitArraySameAverage([3,13,8])
+
+class Solution {
+    func splitArraySameAverage(_ nums: [Int]) -&gt; Bool {
+        var sum = 0 
+        var maxelement = 0
+        for num in nums {
+            sum += num
+            if num &gt; maxelement {
+                maxelement = num
+            }
+        }
+        if (sum == 0) {
+            return true
+        }
+        let count = nums.count
+        if count &lt;= 1 {
+            return false
+        }
+        var table = [Int]()
+        for i in 0...(sum + maxelement + 1) {
+            table.append(0)
+        }
+        
+        for i in 0..&lt;count {
+            for s in stride(from: sum, through: 0, by: -1) {
+                if table[s] != 0 {
+                    table[s + nums[i]] |= (table[s] &lt;&lt; 1) 
+                }
+            } 
+            table[nums[i]] |= 2
+        }
+    print(table)
+        for s in 1...sum {
+            if (((s*count) % sum) == 0) {
+                print("s:", s)
+                let residue = (s*count) / sum
+                print("residue:", residue)
+                if (residue != 0 &amp;&amp; residue &lt; count &amp;&amp; ((table[s] &amp; (1 &lt;&lt; (residue))) != 0)) {
+                    return true
+                }
+            }
+        }
+        return false 
+    }
+}
+
+Solution().splitArraySameAverage([0,0,0,0,0])
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 2620}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

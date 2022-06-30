@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>class Solution {
+    func minDistance(_ word1: String, _ word2: String) -&gt; Int {
+        let firstLength = word1.count
+        let secondLength = word2.count
+        var table = Array(repeating: Array(repeating: 0, count: secondLength+1), count: firstLength+1)
+        for i in 0...firstLength {
+            for j in 0...secondLength {
+                if (i == 0 &amp;&amp; j &gt;= 0) {
+                    table[i][j] = j
+                } else if (j == 0 &amp;&amp; i &gt;= 0) {
+                    table [i][j] = i
+                } else if (i &gt; 0 &amp;&amp; j &gt; 0) {
+                    let indexI = word1.index(word1.startIndex, offsetBy: i-1)
+                    let indexJ = word2.index(word2.startIndex, offsetBy: j-1)
+                    let equal = word1[indexI] == word2[indexJ] ? 0 : 1
+                    table[i][j] = min(table[i-1][j-1] + equal, table[i-1][j] + 1, table[i][j-1] + 1)
+                    if (i == 1 &amp;&amp; j == 1) { print(equal) } 
+                }
+            }
+        }       
+        for i in 0...firstLength {
+                print(table[i], " ")
+        }
+        return table[firstLength][secondLength]
+    }
+}
+
+print(Solution().minDistance("horse", "ros"))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 1163}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
