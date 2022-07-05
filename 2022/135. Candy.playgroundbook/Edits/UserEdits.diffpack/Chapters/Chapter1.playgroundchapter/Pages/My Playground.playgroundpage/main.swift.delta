@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>class Solution {
+    func candy(_ ratings: [Int]) -&gt; Int {
+        var candles = [Int](repeating: 0, count: ratings.count)
+        if ratings.count == 1 {
+            return 1
+        }
+        candles[0] = 1
+        for i in 0..&lt;(ratings.count - 1) {
+            if ratings[i + 1] &gt; ratings[i] {
+                candles[i + 1] = candles[i] + 1
+            } else  {
+                candles[i + 1] = 1
+            }
+        }
+        for i in stride(from: ratings.count - 1, through: 1, by: -1) {
+            if ratings[i] &lt; ratings[i - 1] {
+                candles[i - 1] = max(candles[i] + 1, candles[i - 1]
+                )
+            } else {
+                candles[i - 1] = max(candles[i - 1], 1)
+            }
+        }
+        var sum = 0 
+        for candle in candles {
+            sum += candle 
+        }
+        return sum 
+    }
+}
+
+print(Solution().candy([1,2,2]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 881}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

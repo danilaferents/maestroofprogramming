@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>class Solution {
+    func longestPalindrome(_ s: String) -&gt; String {
+        var arrays = s.map {
+            return $0
+        }
+        let size = arrays.count
+        var table = [[Int]](repeating: [Int](repeating: 0, count: size), count: size)
+        // set equal row and column to true
+        var length = 1 
+        var start = 0 
+        for i in 0..&lt;size {
+            table[i][i] = 1
+        }
+        // find 2 letter polindromes
+        for i in 0..&lt;size - 1 {
+            if (arrays[i] == arrays[i + 1]) {
+                table[i][i+1] = 1
+                length = 2
+                start = i
+            }
+        }
+        guard (size &gt; 2) else {      
+            return returnValue(array: arrays, from: start, forInt: length)
+        }
+        for k in 3...size {
+            for i in 0..&lt;(size - k + 1) {
+                let j = i + k - 1
+                if (table[i + 1][j - 1] == 1 &amp;&amp; arrays[i] == arrays[j]) {
+                    table[i][j] = 1
+                    length = k
+                    start = i
+                }
+            }
+        }
+        return returnValue(array: arrays, from: start, forInt: length)
+    }
+    func returnValue(array: [Character], from: Int, forInt: Int) -&gt; String {
+        var string = ""
+        for i in from..&lt;from+forInt {
+            string += String(array[i])
+        }
+        return string
+    }
+}
+
+
+print(Solution().longestPalindrome("c"))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 1409}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

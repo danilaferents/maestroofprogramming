@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation 
+
+class Solution {
+    func maxArea(_ h: Int, _ w: Int, _ horizontalCuts: [Int], _ verticalCuts: [Int]) -&gt; Int {
+        var maxSquare: UInt64 = 0
+        var maxWidth = 0 
+        var sortedHCuts = horizontalCuts.filter {
+            return $0 &gt; 0 &amp;&amp; $0 &lt; h
+        }
+        sortedHCuts.append(contentsOf: [0, h])
+        sortedHCuts = sortedHCuts.sorted()
+        var sortedVCuts = verticalCuts.filter {
+            return $0 &gt; 0 &amp;&amp; $0 &lt; w
+        }
+        sortedVCuts.append(contentsOf: [0, w])
+        sortedVCuts = sortedVCuts.sorted()
+        print(sortedHCuts)
+        for i in 0..&lt;(sortedHCuts.count - 1){
+            let width = sortedHCuts[i + 1] - sortedHCuts[i]
+            if width &gt; maxWidth {
+                maxWidth = width 
+            }
+        }
+        print(sortedVCuts)
+        var maxHeight = 0
+        for i in 0..&lt;(sortedVCuts.count - 1) {
+            let height = sortedVCuts[i + 1] - sortedVCuts[i]
+            if height &gt; maxHeight {
+                maxHeight = height
+            }
+        }
+        maxSquare = UInt64(maxHeight) * UInt64(maxWidth) 
+        let answer = maxSquare % UInt64((go(radix: 10, power: 9) + 7))
+        return Int(answer)
+    }
+    func  go(radix: Int, power: Int) -&gt; Int {
+        return Int(pow(Double(radix), Double(power)))
+    }
+}
+
+print(Solution().maxArea(5, 4, [1,2,4], [1, 3]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 1362}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
